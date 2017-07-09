@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">EasyShopping</string>
+    <string name="app_name">易购</string>
+    <string name="home_str">主页</string>
+    <string name="hot_str">热卖</string>
+    <string name="category_str">分类</string>
+    <string name="cart_str">购物车</string>
+    <string name="mine_str">我的</string>
+
+
+
 </resources>
