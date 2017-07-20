@@ -21,9 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="热门活动"
-            android:textSize="20dp"
+            android:textSize="12dp"
             android:textColor="@color/black"
-            android:paddingTop="10dp"
+            android:paddingTop="2dp"
             />
 
         <View

@@ -2,13 +2,19 @@ package com.bart.easyshopping.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bart.easyshopping.Constants;
 import com.bart.easyshopping.R;
+import com.bart.easyshopping.adapter.CardViewtemDecortion;
+import com.bart.easyshopping.adapter.HomeCampaignAdapter;
 import com.bart.easyshopping.bean.Banner;
+import com.bart.easyshopping.bean.HomeCampaign;
+import com.bart.easyshopping.http.BaseCallback;
 import com.bart.easyshopping.http.OkHttpHelper;
 import com.bart.easyshopping.http.SpotsCallBack;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -18,6 +24,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.gson.Gson;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.util.List;
@@ -36,6 +43,7 @@ public class HomeFragment extends BaseFragment {
     private List<Banner> mBanners;
     private Gson mGson = new Gson();
     private OkHttpHelper mHelper = OkHttpHelper.getInstance();
+    private HomeCampaignAdapter mHomeCampaignAdapter;
 
 
     @Nullable
@@ -47,7 +55,7 @@ public class HomeFragment extends BaseFragment {
 
         requestImage();
 
-        initRecyclerView();
+        initRecyclerView(view);
 
         return view;
     }
@@ -157,9 +165,52 @@ public class HomeFragment extends BaseFragment {
     }
 
     // 初始化 RecyclerView
-    private void initRecyclerView() {
+    private void initRecyclerView(View view) {
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.home_recyclerview);
+
+        mHelper.get(Constants.API.CAMPAIGN_HOME, new BaseCallback<List<HomeCampaign>>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onFailure(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
+            public void onSuccess(Response response, List<HomeCampaign> homeCampaigns) {
+
+                initRCData(homeCampaigns);
+            }
+
+            @Override
+            public void onError(Response response, int code, Exception e) {
+
+            }
+        });
 
     }
+
+    // 初始化RecyclerView 的Data
+    private void initRCData(List<HomeCampaign> homeCampaigns){
+
+
+        mHomeCampaignAdapter = new HomeCampaignAdapter(homeCampaigns,getContext());
+        mRecyclerView.setAdapter(mHomeCampaignAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mRecyclerView.addItemDecoration(new CardViewtemDecortion());
+
+    }
+
 
 
     // 回收
