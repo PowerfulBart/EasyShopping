@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTab() {
 
-        Tab tab_home = new Tab(R.drawable.home_selector,R.string.home_str, HomeFragment.class);
-        Tab tab_hot = new Tab(R.drawable.hot_selector,R.string.hot_str, HotFragment.class);
-        Tab tab_category = new Tab(R.drawable.category_selector,R.string.category_str, CategoryFragment.class);
-        Tab tab_cart = new Tab(R.drawable.cart_selector,R.string.cart_str, CartFragment.class);
-        Tab tab_mine = new Tab(R.drawable.mine_selector,R.string.mine_str, MineFragment.class);
+        Tab tab_home = new Tab(R.drawable.selector_home,R.string.home_str, HomeFragment.class);
+        Tab tab_hot = new Tab(R.drawable.selector_hot,R.string.hot_str, HotFragment.class);
+        Tab tab_category = new Tab(R.drawable.selector_category,R.string.category_str, CategoryFragment.class);
+        Tab tab_cart = new Tab(R.drawable.selector_cart,R.string.cart_str, CartFragment.class);
+        Tab tab_mine = new Tab(R.drawable.selector_mine,R.string.mine_str, MineFragment.class);
 
         tabLists.add(tab_home);
         tabLists.add(tab_hot);
