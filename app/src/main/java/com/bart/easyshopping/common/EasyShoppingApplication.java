@@ -1,4 +1,4 @@
-package com.bart.easyshopping;
+package com.bart.easyshopping.common;
 
 import android.app.Application;
 

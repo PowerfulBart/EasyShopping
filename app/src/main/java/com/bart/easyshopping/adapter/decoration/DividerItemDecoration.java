@@ -1,4 +1,4 @@
-package com.bart.easyshopping.adapter;
+package com.bart.easyshopping.adapter.decoration;
 
 import android.content.Context;
 import android.content.res.TypedArray;

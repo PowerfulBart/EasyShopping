@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bart.easyshopping.Constants;
+import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.R;
-import com.bart.easyshopping.adapter.BaseAdapter;
-import com.bart.easyshopping.adapter.DividerItemDecoration;
+import com.bart.easyshopping.adapter.decoration.DividerItemDecoration;
 import com.bart.easyshopping.adapter.HWAdapter;
 import com.bart.easyshopping.adapter.HotWaresAdapter;
 import com.bart.easyshopping.bean.Page;
@@ -116,7 +115,7 @@ public class HotFragment extends BaseFragment {
 
     private void getData() {
 
-        String url = Constants.API.WARES_HOT + "?curPage=" + currentPage + "&pageSize=" + pageSize; // 写少了个"="
+        String url = Constants.API.HOT_WARES + "?curPage=" + currentPage + "&pageSize=" + pageSize; // 写少了个"="
 
         mHelper.get(url, new SpotsCallBack<Page<Wares>>(getContext()) {
 
@@ -147,14 +146,13 @@ public class HotFragment extends BaseFragment {
         switch (currentState){
             case STATE_NORMAL:
                 mHWAdapter = new HWAdapter(getContext(),datas);
-
                 // 为布局设置点击事件
-                mHWAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-
-                    }
-                });
+//                mHWAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//
+//                    }
+//                });
                 mRecyclerView.setAdapter(mHWAdapter);
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -173,7 +171,7 @@ public class HotFragment extends BaseFragment {
             case STATE_LOADMORE:
                 mHWAdapter.addData(mHWAdapter.getData().size(),datas);
                 mRecyclerView.scrollToPosition(mHWAdapter.getData().size());
-                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishRefreshLoadMore();  // 这里不要用成finishRefresh，不然会一直处于加载更多的状态
                 break;
             default:
                 break;

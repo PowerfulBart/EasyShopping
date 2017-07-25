@@ -10,15 +10,14 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 /**
- * 作者：${Bart} on 2017/7/24 10:58
+ * 作者：${Bart} on 2017/7/25 18:56
  * 邮箱：botao_zheng@163.com
  */
 
-public class HWAdapter extends com.bart.easyshopping.adapter.SimpleAdapter<Wares> {
+public class WaresAdapter extends SimpleAdapter<Wares> {
 
-
-    public HWAdapter(Context context, List<Wares>wares){
-        super(context, R.layout.template_hot_wares,wares);
+    public WaresAdapter(Context context,List<Wares> datas) {
+        super(context, R.layout.template_grid_wares, datas);
     }
 
     @Override
@@ -27,13 +26,8 @@ public class HWAdapter extends com.bart.easyshopping.adapter.SimpleAdapter<Wares
         SimpleDraweeView draweeView = (SimpleDraweeView) viewHolder.getView(R.id.drawee_view);
         draweeView.setImageURI(Uri.parse(item.getImgUrl()));
 
-//        // 若需要给布局中的控件设置点击事件，这样写就可以了
-//        draweeView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
         viewHolder.getTextView(R.id.text_title).setText(item.getName());
         viewHolder.getTextView(R.id.text_price).setText(""+item.getPrice() + "元");
+
     }
 }

@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bart.easyshopping.Constants;
+import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.R;
-import com.bart.easyshopping.adapter.CardViewtemDecortion;
+import com.bart.easyshopping.adapter.decoration.CardViewtemDecortion;
 import com.bart.easyshopping.adapter.HomeCampaignAdapter;
 import com.bart.easyshopping.bean.Banner;
 import com.bart.easyshopping.bean.HomeCampaign;
@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment {
 
     private void requestImage() {
 
-        String url = "http://112.124.22.238:8081/course_api/banner/query?type=1";
+//        String url = "http://112.124.22.238:8081/course_api/banner/query?type=1";
 //        OkHttpClient client = new OkHttpClient();
 //        Request request = new Request.Builder()
 //                .url(url)
@@ -91,7 +91,7 @@ public class HomeFragment extends BaseFragment {
 //            };
 //        });
 
-        mHelper.get(url, new SpotsCallBack<List<Banner>>(getContext()) {
+        mHelper.get(Constants.API.HOME_BANNER, new SpotsCallBack<List<Banner>>(getContext()) {
 
             @Override
             public void onSuccess(Response response, List<Banner> banners) {
@@ -161,7 +161,7 @@ public class HomeFragment extends BaseFragment {
 //            public void onSliderClick(BaseSliderView slider) {
 //
 //            }
-//        });
+//
     }
 
     // 初始化 RecyclerView
@@ -169,7 +169,7 @@ public class HomeFragment extends BaseFragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_recyclerview);
 
-        mHelper.get(Constants.API.CAMPAIGN_HOME, new BaseCallback<List<HomeCampaign>>() {
+        mHelper.get(Constants.API.HOME_CAMPAIGN, new BaseCallback<List<HomeCampaign>>() {
 
             @Override
             public void onBeforeRequest(Request request) {
