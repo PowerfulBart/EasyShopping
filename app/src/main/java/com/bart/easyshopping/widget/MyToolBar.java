@@ -54,13 +54,14 @@ public class MyToolBar extends Toolbar {
          */
 
         // 如果自定义属性组为空，说明没有自定义属性
+        // TintTypedArray 类用于读取自定义属性
         if (attrs != null){
 
             final TintTypedArray a = TintTypedArray.obtainStyledAttributes(getContext(), attrs,
                     R.styleable.MyToolBar, defStyleAttr, 0);
 
             // 将xml文件中设置的 rightButtonIcon 图片资源读进来，再调用set函数
-            // 在xml里面设置实际上和在java里面调用 set函数 是一样的,
+            // 在xml里面设置实际上和在java里面调用 set函数 是一样的,xml属性最终还是调的 set方法
             // 当然xml多了一个解析的过程,放到java代码里调用会稍微好些(实际没什么区别)。
             // 所以在类文件中设置属性比xml中快一点，但是写在xml中更直观
             final Drawable rightIcon = a.getDrawable(R.styleable.MyToolBar_rightButtonIcon);
@@ -134,7 +135,7 @@ public class MyToolBar extends Toolbar {
         if (mView == null){
 
             mInflater = LayoutInflater.from(getContext());
-            mView = mInflater.inflate(R.layout.toolbar,null);
+            mView = mInflater.inflate(R.layout.widget_toolbar,null);
 
             searchEt = (EditText) mView.findViewById(R.id.toolbar_searchview);
             titleTv = (TextView) mView.findViewById(R.id.toolbar_title);
