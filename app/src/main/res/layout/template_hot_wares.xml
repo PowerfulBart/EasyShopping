@@ -12,7 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@null"
-        android:id="@+id/drawee_view"
+        android:id="@+id/hot_wares_drawee_view"
         android:layout_alignParentLeft="true"
         app:viewAspectRatio="1">
     </com.facebook.drawee.view.SimpleDraweeView>
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/drawee_view">
+        android:layout_toRightOf="@+id/hot_wares_drawee_view">dd
 
         <TextView
             android:id="@+id/text_title"
@@ -40,6 +40,7 @@
             android:textColor="@color/firebrick"/>
 
         <Button
+            android:id="@+id/add_to_cart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/bigRedButton"

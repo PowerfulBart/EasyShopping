@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bart.easyshopping.R;
+import com.bart.easyshopping.bean.Campaign;
 import com.bart.easyshopping.bean.HomeCampaign;
 import com.squareup.picasso.Picasso;
 
@@ -27,11 +28,17 @@ public class HomeCampaignAdapter extends RecyclerView.Adapter<HomeCampaignAdapte
     private LayoutInflater mInflater;
     private List<HomeCampaign> mList;
     private Context mContext;
+    private  OnCampaignClickListener mListener;
 
     // 构造，将数据传进来
     public HomeCampaignAdapter(List<HomeCampaign> list, Context context) {
         mList = list;
         mContext = context;
+    }
+
+    public void setOnCampaignClickListener(OnCampaignClickListener listener){
+
+        this.mListener = listener;
     }
 
 
@@ -54,13 +61,24 @@ public class HomeCampaignAdapter extends RecyclerView.Adapter<HomeCampaignAdapte
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position % 2 == 0){
+            return VIEW_TYPE_R;
+        }
+        else return VIEW_TYPE_L;
+    }
+
+
     // 参数二即为 要加载的布局的类型
     // onCreateViewHolder的作用为：将欲显示的布局加载进来，
     // 并作为参数传进ViewHolder的构造函数中，最后将New出来的ViewHolder实例返回,接下来执行onBindViewHolder
+    // 每次都会执行 getItemViewType()去获取 viewType，即获取不同布局，常用在聊天软件的设计
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         mInflater = LayoutInflater.from(parent.getContext());
+
 
         if (viewType == VIEW_TYPE_L){
 
@@ -83,6 +101,7 @@ public class HomeCampaignAdapter extends RecyclerView.Adapter<HomeCampaignAdapte
         Picasso.with(mContext).load(homeCampaign.getCpTwo().getImgUrl()).into(holder.imageviewSmallTop);
         Picasso.with(mContext).load(homeCampaign.getCpThree().getImgUrl()).into(holder.imageviewSmallBottom);
 
+
     }
 
     // return data.size()
@@ -91,5 +110,11 @@ public class HomeCampaignAdapter extends RecyclerView.Adapter<HomeCampaignAdapte
         return mList.size();
     }
 
+
+    public  interface OnCampaignClickListener{
+
+        void onClick(View view,Campaign campaign);
+
+    }
 
 }

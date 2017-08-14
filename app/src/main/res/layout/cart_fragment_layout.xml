@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:text="购物车"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cart_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
 
-</LinearLayout>
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="#802f4f4f"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/checkbox_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            android:text="@string/cart_check_box"
+            android:textSize="15dp"
+            style="@style/customCheckbox"/>
+
+
+        <TextView
+            android:id="@+id/cart_total_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/checkbox_all"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:text="@string/cart_total_price_tv"/>
+
+        <Button
+            android:id="@+id/btn_pay_now"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:minHeight="60dp"
+            android:minWidth="120dp"
+            android:text="@string/cart_pay_now_btn"
+            style="@style/bigRedButton"/>
+
+
+        <Button
+            android:id="@+id/btn_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:minHeight="60dp"
+            android:minWidth="120dp"
+            android:text="@string/cart_del_ware"
+            style="@style/bigRedButton"/>
+    </RelativeLayout>
+
+</RelativeLayout>

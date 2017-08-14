@@ -11,8 +11,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bart.easyshopping.R;
@@ -20,15 +20,17 @@ import com.bart.easyshopping.R;
 /**
  * 作者：${Bart} on 2017/7/9 17:26
  * 邮箱：botao_zheng@163.com
+ *
  */
 
 public class MyToolBar extends Toolbar {
 
     private LayoutInflater mInflater;
+
     private View mView;
     private EditText searchEt;
     private TextView titleTv;
-    private ImageButton rightBtn;
+    private Button rightBtn;
 
     public MyToolBar(Context context) {
         this(context,null);
@@ -85,80 +87,67 @@ public class MyToolBar extends Toolbar {
     }
 
 
+    // 右侧Button的 设背景、设点击事件、设Text、获得Button对象
     public void  setRightButtonIcon(Drawable icon){
 
         if(rightBtn !=null){
-
-            rightBtn.setImageDrawable(icon);  // 原来是setimageDrawable（）
+            rightBtn.setBackground(icon);  // 原来是setimageDrawable（）
             rightBtn.setVisibility(VISIBLE);
         }
+    }
+
+    public  void setRightButtonOnClickListener(OnClickListener li){
+
+        rightBtn.setOnClickListener(li);
+    }
+
+    public void setRightButtonText(int resId){
+        setRightButtonText(getResources().getString(resId));
+    }
+    //  CharSequence与String都能用于定义字符串，
+    // 但CharSequence的值是可读可写序列，而String的值是只读序列。
+    public void setRightButtonText(CharSequence text){
+        if (rightBtn != null){
+            rightBtn.setText(text);
+            rightBtn.setVisibility(VISIBLE);
+        }
+    }
+
+    public Button getRightBtn(){
+
+        return this.rightBtn;
 
     }
 
 
-//    public  void setRightButtonOnClickListener(OnClickListener li){
-//
-//        rightBtn.setOnClickListener(li);
-//    }
-
-
+    // 中间TextView的 设文字，由于父类已经有此方法，我们重写它即可
     @Override
     public void setTitle(@StringRes int resId) {
-
         setTitle(getContext().getText(resId));
     }
 
     @Override
     public void setTitle(CharSequence title) {
 
-        /*
-        本身ToolBar是可以通过 title 属性来设置文字的
-
-        我们的ToolBar继承了ToolBar，所以会先初始化父类的构造方法，当读到setTitle时，
-        因为我们重写了，所以会调用我们的setTitle，但发现我们此时TextView是null（父类里面会判断，若空就new一个TextView）
-        所以这里我们要调用initView()
-         */
-
+        //本身ToolBar是可以通过 title 属性来设置文字的,我们的ToolBar继承了ToolBar，
+        // 所以会先初始化父类的构造方法，当读到setTitle时，因为我们重写了，所以会调用我们的setTitle，
+        // 但发现我们此时TextView是null（父类里面会判断，若空就new一个TextView）
+        // 所以这里我们要调用initView()
         initView();
+
         if (titleTv != null){
 
             titleTv.setText(title);
             showTitleView();
         }
-
-
     }
 
-    private void initView() {
-
-        //初始化ToolBar时会调用此方法，这里做一下判断，防止重复创建
-        if (mView == null){
-
-            mInflater = LayoutInflater.from(getContext());
-            mView = mInflater.inflate(R.layout.widget_toolbar,null);
-
-            searchEt = (EditText) mView.findViewById(R.id.toolbar_searchview);
-            titleTv = (TextView) mView.findViewById(R.id.toolbar_title);
-            rightBtn = (ImageButton) mView.findViewById(R.id.toolbar_rightButton);
-
-            LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_HORIZONTAL);
-
-            addView(mView,lp);
-        }
-
-    }
-
-
-    // 以下方法用于 控制 searchEt和titleTv 的可见
+    // 中间文字 和 搜索框 的可见性
     public  void showSearchView(){
 
         if(searchEt !=null)
             searchEt.setVisibility(VISIBLE);
-
     }
-
 
     public void hideSearchView(){
         if(searchEt !=null)
@@ -174,8 +163,25 @@ public class MyToolBar extends Toolbar {
     public void hideTitleView() {
         if (titleTv != null)
             titleTv.setVisibility(GONE);
-
     }
 
+    private void initView() {
 
+        //初始化ToolBar时会调用此方法，这里做一下判断，防止重复创建
+        if (mView == null){
+
+            mInflater = LayoutInflater.from(getContext());
+            mView = mInflater.inflate(R.layout.widget_toolbar,null);
+
+            searchEt = (EditText) mView.findViewById(R.id.toolbar_searchview);
+            titleTv = (TextView) mView.findViewById(R.id.toolbar_title);
+            rightBtn = (Button) mView.findViewById(R.id.toolbar_rightButton);
+
+            LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_HORIZONTAL);
+
+            addView(mView,lp);
+        }
+    }
 }

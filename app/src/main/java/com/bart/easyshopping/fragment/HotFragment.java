@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.R;
-import com.bart.easyshopping.adapter.decoration.DividerItemDecoration;
 import com.bart.easyshopping.adapter.HWAdapter;
 import com.bart.easyshopping.adapter.HotWaresAdapter;
+import com.bart.easyshopping.adapter.decoration.DividerItemDecoration;
 import com.bart.easyshopping.bean.Page;
 import com.bart.easyshopping.bean.Wares;
+import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.http.OkHttpHelper;
 import com.bart.easyshopping.http.SpotsCallBack;
 import com.cjj.MaterialRefreshLayout;
@@ -118,6 +118,7 @@ public class HotFragment extends BaseFragment {
         String url = Constants.API.HOT_WARES + "?curPage=" + currentPage + "&pageSize=" + pageSize; // 写少了个"="
 
         mHelper.get(url, new SpotsCallBack<Page<Wares>>(getContext()) {
+
 
 
             @Override

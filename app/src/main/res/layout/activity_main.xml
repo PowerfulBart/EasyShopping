@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context="com.bart.easyshopping.activity.MainActivity">
 
+    <com.bart.easyshopping.widget.MyToolBar
+        android:id="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        app:isShowSearchView="true"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="wrap_content">
+
+    </com.bart.easyshopping.widget.MyToolBar>
+
     <!--实际装Fragment的容器Fragment-->
     <FrameLayout
         android:id="@+id/real_tabhost"

@@ -40,7 +40,7 @@ public class HotWaresAdapter extends RecyclerView.Adapter<HotWaresAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mSimpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.drawee_view);
+            mSimpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.hot_wares_drawee_view);
             titleTv = (TextView) itemView.findViewById(R.id.text_title);
             priceTv = (TextView) itemView.findViewById(R.id.text_price);
 

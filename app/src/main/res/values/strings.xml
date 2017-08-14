@@ -5,6 +5,11 @@
     <string name="category_str">分类</string>
     <string name="cart_str">购物车</string>
     <string name="mine_str">我的</string>
+    
+    <string name="cart_check_box">全选</string>
+    <string name="cart_total_price_tv">总价</string>
+    <string name="cart_pay_now_btn">立即购买</string>
+    <string name="cart_del_ware">删除商品</string>
 
 
 </resources>

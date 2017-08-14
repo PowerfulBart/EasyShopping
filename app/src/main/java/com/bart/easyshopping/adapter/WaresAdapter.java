@@ -23,7 +23,7 @@ public class WaresAdapter extends SimpleAdapter<Wares> {
     @Override
     public void convert(BaseViewHolder viewHolder, Wares item) {
 
-        SimpleDraweeView draweeView = (SimpleDraweeView) viewHolder.getView(R.id.drawee_view);
+        SimpleDraweeView draweeView = (SimpleDraweeView) viewHolder.getView(R.id.category_grid_drawee_view);
         draweeView.setImageURI(Uri.parse(item.getImgUrl()));
 
         viewHolder.getTextView(R.id.text_title).setText(item.getName());

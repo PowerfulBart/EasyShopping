@@ -1,6 +1,7 @@
 package com.bart.easyshopping.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.bart.easyshopping.fragment.CategoryFragment;
 import com.bart.easyshopping.fragment.HomeFragment;
 import com.bart.easyshopping.fragment.HotFragment;
 import com.bart.easyshopping.fragment.MineFragment;
+import com.bart.easyshopping.widget.MyToolBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +27,19 @@ public class MainActivity extends AppCompatActivity {
 
     private LayoutInflater inflate;
     private FragmentTabHost tabhost;
-    private List<Tab> tabLists;
+    private List<Tab> tabLists = new ArrayList<>(5);
+    private CartFragment mCartFragment;
+    private MyToolBar mMyToolBar;
+
+    // logt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tabLists = new ArrayList<>(5);
+        initToolBar();
         initTab();
-
-
-
-
     }
 
 
@@ -67,9 +69,25 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                if (tabId == getString(R.string.cart_str)){
+                    //进入购物车则隐藏ToolBar，隐藏方法在以下方法中调用
+                    refreshData();
+
+                }
+                else{
+                    // 其他Fragment则显示 搜索栏
+                    mMyToolBar.showSearchView();
+                    mMyToolBar.hideTitleView();
+                    mMyToolBar.getRightBtn().setVisibility(View.GONE);
+                }
+            }
+        });
+
         tabhost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);  //去掉Tab之间的分割线
         tabhost.setCurrentTab(0);
-
 //        tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 //            @Override
 //            public void onTabChanged(String tabId) {
@@ -92,9 +110,8 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-
-
     }
+
 
     private View buildIndicator(Tab tab) {
 
@@ -109,4 +126,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void refreshData(){
+
+        if (mCartFragment == null){
+
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.cart_str));
+
+            // 上面获取到的fragment可能是空的，因为只有前面点击过该fragment，该fragment才会被创建并加入
+            // FragmentManager 中，所以判空是防止 刚打开应用还没加载fragment导致这里为空的情况
+            if (fragment != null) {
+
+                mCartFragment = (CartFragment) fragment;
+                mCartFragment.refreshCartData();
+                // Fragment的onAttach()里面对可见性的操作只有在碎片和活动绑定时有效，后面如果添新商品到购物车时，
+                // 刷新数据之后变回来了，所以每次刷新数据时，就去设置一次可见性
+                mCartFragment.changeToolbar();
+            }
+        }
+        else {
+            mCartFragment.refreshCartData();
+            mCartFragment.changeToolbar();
+        }
+    }
+
+
+    private void initToolBar() {
+
+        mMyToolBar = (MyToolBar) findViewById(R.id.toolbar);
+    }
 }

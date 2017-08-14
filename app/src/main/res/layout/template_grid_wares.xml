@@ -11,7 +11,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="@dimen/ware_grid_img_width"
         android:layout_height="@dimen/ware_grid_img_height"
-        android:id="@+id/drawee_view"
+        android:id="@+id/category_grid_drawee_view"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center">
     </com.facebook.drawee.view.SimpleDraweeView>

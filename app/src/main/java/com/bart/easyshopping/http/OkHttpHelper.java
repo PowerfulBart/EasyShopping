@@ -26,13 +26,16 @@ import java.util.concurrent.TimeUnit;
 public class OkHttpHelper {
 
     // http://www.jianshu.com/p/9a1f37ba526b 使用单例，拦截器等优化
+    // 该类使用的单例模式为 饿加载，可以优化为懒加载并处理并发情况（两次判空一次加锁）
+    // 添加 volatile 是为了避免双重锁失效问题
 
-    public static final String TAG = "OkHttpHelper";
+    public  static final String TAG = "OkHttpHelper";
 
-    private static OkHttpHelper mInstance;  //用于单例返回，static
+    private volatile static OkHttpHelper mInstance = null;  //用于单例返回，static
     private OkHttpClient mClient;
     private Handler mHandler;
     private Gson mGson;
+
 
     static {
         mInstance = new OkHttpHelper();  // Helper 实例化，单例
@@ -70,10 +73,12 @@ public class OkHttpHelper {
         return buildRequest(url,HttpMethodType.GET,null);
     }
 
+
     public Request buildPostRequest(String url,Map<String,String> params){
 
         return buildRequest(url,HttpMethodType.POST,params);
     }
+
 
     private Request buildRequest(String url,HttpMethodType type,Map<String,String> params){
 
@@ -112,6 +117,7 @@ public class OkHttpHelper {
                     Log.d(TAG, "resultStr: " + resultStr);
 
                     if (callback.mType == String.class){
+
                         callbackSuccess(callback,response,resultStr);
                     }else {
 
