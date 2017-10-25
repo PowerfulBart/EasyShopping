@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.R;
-import com.bart.easyshopping.adapter.decoration.CardViewtemDecortion;
 import com.bart.easyshopping.adapter.HomeCampaignAdapter;
+import com.bart.easyshopping.adapter.decoration.CardViewtemDecortion;
 import com.bart.easyshopping.bean.Banner;
 import com.bart.easyshopping.bean.HomeCampaign;
+import com.bart.easyshopping.common.Constants;
 import com.bart.easyshopping.http.BaseCallback;
 import com.bart.easyshopping.http.OkHttpHelper;
 import com.bart.easyshopping.http.SpotsCallBack;
@@ -55,7 +55,9 @@ public class HomeFragment extends BaseFragment {
 
         requestImage();
 
+
         initRecyclerView(view);
+
 
         return view;
     }

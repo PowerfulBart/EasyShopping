@@ -8,7 +8,9 @@
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
     <application
+
         android:name=".common.EasyShoppingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -16,7 +18,9 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,6 +29,9 @@
         </activity>
         <activity android:name=".activity.TestActivity">
         </activity>
+
+
+
     </application>
 
 </manifest>

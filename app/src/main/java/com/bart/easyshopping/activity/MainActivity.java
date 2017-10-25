@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private CartFragment mCartFragment;
     private MyToolBar mMyToolBar;
 
+
     // logt
 
     @Override
@@ -38,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         initToolBar();
         initTab();
+
     }
 
 

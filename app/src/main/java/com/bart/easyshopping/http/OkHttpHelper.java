@@ -37,12 +37,8 @@ public class OkHttpHelper {
     private Gson mGson;
 
 
-    static {
-        mInstance = new OkHttpHelper();  // Helper 实例化，单例
-    }
-
     private OkHttpHelper(){
-
+       
         mHandler = new Handler(Looper.getMainLooper()); // Handler实例化，用于主线程
         mClient = new OkHttpClient();  // client 初始化
         mGson = new Gson();  // Gson实例化
@@ -50,10 +46,18 @@ public class OkHttpHelper {
         mClient.setConnectTimeout(10, TimeUnit.SECONDS);
         mClient.setReadTimeout(10,TimeUnit.SECONDS);
         mClient.setWriteTimeout(30,TimeUnit.SECONDS);
+
     }
 
     public static OkHttpHelper getInstance(){
-        return mInstance; //单例返回 Helper类实例
+        if(mInstance == null){
+            synchronized (OkHttpHelper.class){
+                if(mInstance == null){
+                    mInstance = new OkHttpHelper();  // Helper 实例化，单例
+                }
+            }
+        }
+        return mInstance;
     }
 
     public void get(String url,BaseCallback callback){
@@ -101,6 +105,7 @@ public class OkHttpHelper {
     public void doRequest(Request request, final BaseCallback callback){
 
         callback.onBeforeRequest(request);
+
 
         mClient.newCall(request).enqueue(new Callback() {
             @Override
